@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arroz Caldo na may Nilagang Itlog">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#26A69A" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#g)"/>
+  <circle cx="352" cy="48" r="78" fill="#26A69A" opacity="0.12"/>
+  <circle cx="48" cy="256" r="96" fill="#26A69A" opacity="0.09"/>
+  <text x="200" y="132" font-size="96" text-anchor="middle" dominant-baseline="central">🍚</text>
+  <line x1="120" y1="186" x2="280" y2="186" stroke="#26A69A" stroke-width="3" opacity="0.45"/>
+  <text x="200" y="232" font-size="18" font-weight="bold" text-anchor="middle" font-family="Merriweather, Georgia, serif" fill="#26A69A">Arroz Caldo na may</text>
+  <text x="200" y="256" font-size="18" font-weight="bold" text-anchor="middle" font-family="Merriweather, Georgia, serif" fill="#26A69A">Nilagang Itlog</text>
+</svg>
