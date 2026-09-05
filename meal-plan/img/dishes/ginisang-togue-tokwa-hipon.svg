@@ -2,15 +2,15 @@
 <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ginisang Togue na may Tokwa at Hipon">
   <defs>
     <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFF4E6"/>
-      <stop offset="100%" stop-color="#C4671A" stop-opacity="0.18"/>
+      <stop offset="0%" stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#7B4FA0" stop-opacity="0.18"/>
     </linearGradient>
   </defs>
   <rect width="400" height="300" fill="url(#g)"/>
-  <circle cx="352" cy="48" r="78" fill="#C4671A" opacity="0.12"/>
-  <circle cx="48" cy="256" r="96" fill="#C4671A" opacity="0.09"/>
+  <circle cx="352" cy="48" r="78" fill="#7B4FA0" opacity="0.12"/>
+  <circle cx="48" cy="256" r="96" fill="#7B4FA0" opacity="0.09"/>
   <text x="200" y="132" font-size="96" text-anchor="middle" dominant-baseline="central">🌱</text>
-  <line x1="120" y1="186" x2="280" y2="186" stroke="#C4671A" stroke-width="3" opacity="0.45"/>
-  <text x="200" y="232" font-size="18" font-weight="bold" text-anchor="middle" font-family="Merriweather, Georgia, serif" fill="#C4671A">Ginisang Togue na may</text>
-  <text x="200" y="256" font-size="18" font-weight="bold" text-anchor="middle" font-family="Merriweather, Georgia, serif" fill="#C4671A">Tokwa at Hipon</text>
+  <line x1="120" y1="186" x2="280" y2="186" stroke="#7B4FA0" stroke-width="3" opacity="0.45"/>
+  <text x="200" y="232" font-size="18" font-weight="bold" text-anchor="middle" font-family="Merriweather, Georgia, serif" fill="#7B4FA0">Ginisang Togue na may</text>
+  <text x="200" y="256" font-size="18" font-weight="bold" text-anchor="middle" font-family="Merriweather, Georgia, serif" fill="#7B4FA0">Tokwa at Hipon</text>
 </svg>
