@@ -1,8 +1,9 @@
 /* Dart Vader — offline cache.
    Bump VERSION on every publish: it names the cache, so a new value wipes the
    old one on activate and forces the new page in. */
-const VERSION = 'dart-vader-2026-09-13b';
-const CORE = ['./', './index.html'];
+const VERSION = 'dart-vader-2026-09-13c';
+const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png',
+              './icon-maskable-512.png', './apple-touch-icon.png'];
 const FONT_CSS = 'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800&family=Archivo:wght@400;500;600;700&display=swap';
 
 /* Pull the font sheet and every face it names on install, so the very first
