@@ -1029,6 +1029,7 @@ function viewSettings(){
     </div>
     <div class="h2">About</div>
     <div class="card"><div class="t-d">Everything you score stays on this device — nothing is uploaded, and no account is needed.
+      After the first visit it works with no signal at all${navigator.onLine?'':' — you are offline right now and it is still running'}.
       Board layout and checkout routes follow the standard board and the darts501 checkout chart.</div></div>
     <div style="height:16px"></div>
     <button class="btn ghost" data-act="wipe">Clear everything on this device</button>
@@ -1164,6 +1165,11 @@ function begin(){
 =========================================================================== */
 if(S.view==='match' && (!S.match || S.match.done)) S.view='home';
 render();
+
+/* offline: after one online visit the app keeps working with no signal */
+if('serviceWorker' in navigator && location.protocol==='https:'){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
 </script>
 </body>
 </html>
