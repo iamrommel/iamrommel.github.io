@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tent Platform — 3 × 3 m Elevated Deck Build Pack</title>
+<style>
+  :root{
+    --accent:#0f766e; --accent-2:#14b8a6; --accent-soft:#ecfdf5;
+    --ink:#11201e; --muted:#5b6b68; --line:#dfe9e6; --bg:#f6faf9; --card:#ffffff;
+    --ok:#16a34a; --warn:#b45309; --danger:#b91c1c; --danger-bg:#fef2f2;
+    --shadow:0 1px 3px rgba(15,60,55,.08),0 8px 24px rgba(15,60,55,.06);
+    --wood:#c8873f; --steel:#64748b; --conc:#9aa3a8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 18px 80px}
+
+  header.hero{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;padding:34px 0 30px;box-shadow:var(--shadow)}
+  header.hero .wrap{padding-bottom:0}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.85;font-weight:600}
+  h1{margin:.25em 0 .15em;font-size:30px;line-height:1.15}
+  .sub{opacity:.94;font-size:15px;max-width:64ch}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:8px 12px;border-radius:10px;font-size:13px;backdrop-filter:blur(4px)}
+  .badge b{display:block;font-size:16px}
+  .badge span{font-size:11px;opacity:.82}
+
+  nav.toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(15,60,55,.04)}
+  nav.toc .wrap{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding-top:8px;padding-bottom:8px}
+  nav.toc a{font-size:13px;font-weight:600;color:var(--muted);padding:6px 10px;border-radius:8px}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent);text-decoration:none}
+  .nav-spacer{flex:1}
+  .btn{cursor:pointer;font:inherit;font-size:13px;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:7px 12px;border-radius:8px}
+  .btn.ghost{background:#fff;color:var(--accent)}
+  .btn:hover{filter:brightness(1.05)}
+
+  section{margin-top:34px;scroll-margin-top:60px}
+  h2{font-size:22px;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+  h2 .ic{font-size:22px}
+  .lead{color:var(--muted);margin:.2em 0 1em;max-width:72ch}
+  h3{font-size:16px;margin:1.4em 0 .5em}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+
+  .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;margin-top:6px}
+  .chip{background:var(--accent-soft);color:var(--accent);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-weight:600}
+  .arrow{color:var(--accent-2);font-weight:700}
+
+  .kits{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:680px){.kits{grid-template-columns:1fr}}
+  .kit{border:1px solid var(--line);border-radius:13px;padding:16px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .kit .tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+  .kit h4{margin:0 0 6px;font-size:15px}
+  .kit p{margin:0 0 12px;font-size:13px;color:var(--muted);flex:1}
+  .kit .price{font-weight:700;color:var(--ink)}
+  .shoplink{display:inline-flex;align-items:center;gap:6px;margin-top:auto;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13px;font-weight:600;align-self:flex-start}
+  .shoplink:hover{filter:brightness(.97);text-decoration:none}
+
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.calc{grid-template-columns:1fr}}
+  .calc label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+  .calc input[type=range]{width:100%;accent-color:var(--accent)}
+  .calc .val{font-weight:700;color:var(--accent)}
+  .readout{display:flex;flex-direction:column;gap:10px;justify-content:center}
+  .ro{background:var(--accent-soft);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .ro .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .ro .v{font-size:21px;font-weight:800;color:var(--accent)}
+  .ro .n{font-size:12px;color:var(--muted)}
+
+  .tools{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 18px;box-shadow:var(--shadow);margin-bottom:14px}
+  .totals{display:flex;gap:22px;flex-wrap:wrap}
+  .totals .t{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .totals .t b{display:block;font-size:19px;color:var(--ink);letter-spacing:0;text-transform:none}
+  .totals .t .pk{color:var(--accent)}
+  .progress{height:7px;background:var(--line);border-radius:99px;overflow:hidden;width:100%;margin-top:10px}
+  .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .3s}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border-radius:13px;overflow:hidden;box-shadow:var(--shadow)}
+  thead th{background:var(--accent-soft);color:var(--accent);text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding:11px 12px}
+  td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
+  tbody tr.alt td{background:var(--bg)}
+  tbody tr.grp td{background:var(--accent-soft);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  td.c{text-align:center;white-space:nowrap}
+  td.price{white-space:nowrap;font-variant-numeric:tabular-nums}
+  .item-name{font-weight:600}
+  .item-note{display:block;color:var(--muted);font-size:12.5px;font-weight:400;margin-top:2px}
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin-left:6px;vertical-align:middle}
+  .pill.opt{background:#eef2ff;color:#4338ca}
+  .pill.alt{background:#fff7ed;color:#b45309}
+  .pill.must{background:#fef2f2;color:#b91c1c}
+  .where{font-size:13px}
+  .where a{font-weight:600}
+  tbody tr.got .item-name,tbody tr.got .where,tbody tr.got td.price{opacity:.45;text-decoration:line-through}
+  .chk{width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
+  .costnote{font-size:13px;color:var(--muted);margin-top:12px;padding:12px 14px;background:#fffbeb;border:1px solid #fde9bf;border-radius:11px}
+
+  details.stage{background:var(--card);border:1px solid var(--line);border-radius:13px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+  details.stage>summary{cursor:pointer;list-style:none;padding:15px 18px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:10px}
+  details.stage>summary::-webkit-details-marker{display:none}
+  details.stage>summary .num{background:var(--accent);color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 auto}
+  details.stage>summary .time{margin-left:auto;font-size:12px;font-weight:600;color:var(--muted)}
+  details.stage>summary .caret{transition:transform .2s;color:var(--accent-2)}
+  details.stage[open]>summary .caret{transform:rotate(90deg)}
+  .stage .body{padding:2px 20px 18px 54px}
+  .stage ol{margin:0;padding-left:18px}
+  .stage li{margin:7px 0}
+
+  .diagramwrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);margin-bottom:18px}
+  .diagramwrap svg{width:100%;height:auto;display:block}
+  .diagramwrap h3{margin:2px 0 8px;padding:0 6px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px;padding:0 6px}
+  .legend i{display:inline-block;width:22px;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+  .dimtxt{font:600 11px -apple-system,sans-serif;fill:#475569}
+  .lbl{font:600 12px -apple-system,sans-serif;fill:#0f172a}
+  .lbl.sm{font-size:10.5px;fill:#475569;font-weight:500}
+  .lbl.w{fill:#fff}
+
+  .safety{background:var(--danger-bg);border:1px solid #fecaca;border-left:5px solid var(--danger);border-radius:12px;padding:16px 20px}
+  .safety h2{color:var(--danger)}
+  .safety ul{margin:.4em 0 0;padding-left:20px}
+  .safety li{margin:8px 0}
+  .safety b{color:var(--danger)}
+
+  .callout{background:var(--accent-soft);border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-size:14px}
+  .callout.warn{background:#fffbeb;border-color:#fde9bf}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  .verdict{border-left:5px solid var(--accent);background:var(--card);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow)}
+  .verdict .yes{color:var(--ok);font-weight:800}
+  .verdict .no{color:var(--danger);font-weight:800}
+
+  @media print{
+    nav.toc,.tools .btn,.btn,.tools button{display:none!important}
+    header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff}
+    .card,.kit,table,details.stage,.diagramwrap,.safety{box-shadow:none;break-inside:avoid}
+    details.stage{border:1px solid #ccc}
+    details.stage:not([open])>summary{display:flex}
+    details.stage>.body{display:block!important}
+    a{color:#000;text-decoration:underline}
+    .shoplink{border:1px solid #999}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Build Pack · Batangas City, Philippines</div>
+    <h1>⛺ Tent Platform — 3 × 3 m deck, 8 ft up, on 4 inset posts</h1>
+    <p class="sub">An elevated camping deck on four 4-inch concrete-filled posts pulled <b>inward</b> from the edges, so the deck cantilevers like a table top. Low budget, buildable by a local welder and two helpers, sized and priced for Philippine hardware.</p>
+    <div class="badges">
+      <div class="badge">Deck<b>3.0 × 3.0 m</b><span>9 m² usable</span></div>
+      <div class="badge">Height<b>8 ft / 2.44 m</b><span>deck top to grade</span></div>
+      <div class="badge">Posts<b>4 × 4" @ 1.8 m</b><span>0.6 m inset all round</span></div>
+      <div class="badge">Materials<b>₱38.8k – ₱58.9k</b><span>indicative PH ranges</span></div>
+      <div class="badge">All-in w/ labour<b>₱61k – ₱93k</b><span>welder + 2 helpers</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#verdict">The verdict</a>
+    <a href="#overview">How it works</a>
+    <a href="#drawings">Drawings</a>
+    <a href="#sizing">Size it</a>
+    <a href="#bom">Materials</a>
+    <a href="#costing">Costing</a>
+    <a href="#build">Build steps</a>
+    <a href="#safety">Safety</a>
+    <span class="nav-spacer"></span>
+    <button class="btn ghost" onclick="resetList()">↺ Reset list</button>
+    <button class="btn" onclick="window.print()">🖨 Print</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ===== VERDICT ===== -->
+  <section id="verdict">
+    <h2><span class="ic">⚖️</span>Your idea, checked against the numbers</h2>
+    <p class="lead">You proposed: <b>four posts only</b>, <b>4-inch pipe</b>, <b>pulled in from the edges and close together</b>. Two of those three are right. One needs a number put on it.</p>
+    <div class="verdict">
+      <p style="margin-top:0"><span class="yes">✔ Four posts — correct.</span> Each post only has to carry about <b>550 kg</b> of service load. A 100 mm concrete column filled to a 17 MPa mix has roughly <b>110 kN (11 tonnes)</b> of pure axial capacity. You are using about <b>5%</b> of it. Six posts, as suggested earlier, buys you nothing here and costs two more footings. Four is the right call.</p>
+      <p><span class="yes">✔ Inset from the edge — correct, and it makes the beams smaller.</span> With posts at the edge, the whole 3 m is one span. Pull them in and the overhangs push back against the middle. Balancing the two gives the exact optimum: <b>inset = deck ÷ 4.828 = 0.62 m</b>, which is why this design lands on a clean <b>0.60 m inset / 1.80 m post grid</b>.</p>
+      <p><span class="no">✘ "Much closer together" — this is the part to stop.</span> Tighter clustering is not free. The platform's own weight is only about <b>200 kg</b>, so the restoring moment is small. At a 1.8 m grid, three adults (240 kg) standing on one edge produce <b>144 kg·m</b> of tipping against <b>180 kg·m</b> of restoring — already only 1.25× margin. Squeeze the grid to 1.0 m and it becomes <b>240 kg·m against 100 kg·m</b>: <b>it tips</b>. Below 1.5 m the deck also starts feeling springy when you walk to the edge.</p>
+      <p style="margin-bottom:0"><b>The fix that makes all of it work:</b> tie the four footings together underground with a <b>grade beam</b> — a 200 × 300 mm concrete strap running post-to-post below grade, poured in the same session as the footings. That turns four separate footings into one rigid 1.8 × 1.8 m base weighing about <b>2 tonnes</b>. Tipping margin goes from 1.25× to about <b>14×</b>, because the two tonnes of buried concrete now count as restoring weight instead of four separate lumps that can each rotate on their own. It costs roughly ₱4,000 in concrete and steel and it is the single highest-value line item in this whole build.</p>
+    </div>
+  </section>
+
+  <!-- ===== OVERVIEW ===== -->
+  <section id="overview">
+    <h2><span class="ic">🧭</span>How the structure works</h2>
+    <p class="lead">Four jobs, four different materials — each doing the one thing it is cheap at.</p>
+    <div class="card">
+      <div class="flow">
+        <span class="chip">Grade beam ties 4 footings into one base</span><span class="arrow">→</span>
+        <span class="chip">Concrete columns take the weight</span><span class="arrow">→</span>
+        <span class="chip">X-bracing takes the sway</span><span class="arrow">→</span>
+        <span class="chip">Steel beams span &amp; cantilever</span><span class="arrow">→</span>
+        <span class="chip">Wood deck on top</span>
+      </div>
+      <h3>The five things that decide whether this works</h3>
+      <div class="grid2">
+        <div><b>① The PVC is a mould, not a post.</b> The 4" pipe is formwork plus a permanent rain jacket. The concrete and the rebar cage inside it are the structure. Never size the column off the pipe's strength.</div>
+        <div><b>② Bracing is not optional at this slenderness.</b> Unbraced, a 100 mm column 2.44 m tall has a slenderness ratio around <b>195</b> — far past any usable limit. X-brace three faces and it drops to about <b>98</b> and the columns go back to just carrying weight.</div>
+        <div><b>③ The grade beam is the whole ballgame.</b> Inset posts mean a narrow base, and the deck only weighs ~200 kg — on its own that is a tippy table. Strapping the four footings into one block is what lets their two tonnes count as ballast, and what fixes the column bases so they are not free-headed cantilevers. Do not skip it to save ₱4,000.</div>
+        <div><b>④ Small aggregate or the pour fails.</b> Inside a 100 mm pipe with four 10 mm bars and ties, the clear gaps are ~37 mm. Use <b>3/8" washed gravel</b> and a wet, flowable 1:2:4 mix, rodded in 300 mm lifts. Standard 3/4" gravel will bridge and leave voids you cannot see.</div>
+        <div><b>⑤ The tent comes down before a typhoon. Always.</b> Batangas sits in NSCP Zone II (200 kph basic wind). With the tent and tarp up, a design-level storm puts roughly <b>3,400 kg·m</b> of overturning against the base's ~2,000 kg·m. Bare deck, tent and tarp and palupo removed, it is about 500 against 2,000 — fine. This is an operating rule, not a nice-to-have.</div>
+        <div><b>⑥ Coco lumber must be treated.</b> Untreated coco lumber outdoors in Batangas is bukbok food inside two or three years. Two coats of wood preservative on every face <em>before</em> assembly, including the cut ends.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DRAWINGS ===== -->
+  <section id="drawings">
+    <h2><span class="ic">📐</span>Drawings</h2>
+    <p class="lead">Plan and elevation are drawn to scale. Every dimension is in millimetres unless noted.</p>
+
+    <!-- FINISHED VIEW -->
+    <div class="diagramwrap">
+      <h3>1 · What it looks like finished</h3>
+      <svg viewBox="0 0 900 530" role="img" aria-label="Isometric view of the finished tent platform with dome tent, tarp on a palupo pole and stair down the far edge">
+        <defs>
+          <linearGradient id="deckG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d59a52"/><stop offset="1" stop-color="#b9782f"/></linearGradient>
+          <linearGradient id="tentG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dead8"/><stop offset="1" stop-color="#0d9488"/></linearGradient>
+          <clipPath id="deckClip"><polygon points="420,259 630,154 420,49 210,154"/></clipPath>
+        </defs>
+
+        <ellipse cx="420" cy="330" rx="330" ry="150" fill="#eaf2ef"/>
+
+        <!-- footings (buried, shown ghosted) + grade beam -->
+        <g opacity=".55">
+          <polygon points="420,388 546,325 420,262 294,325" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="7 5"/>
+          <ellipse cx="420" cy="392" rx="27" ry="14" fill="#cbd5e1"/><ellipse cx="546" cy="329" rx="27" ry="14" fill="#cbd5e1"/>
+          <ellipse cx="294" cy="329" rx="27" ry="14" fill="#cbd5e1"/><ellipse cx="420" cy="266" rx="27" ry="14" fill="#cbd5e1"/>
+        </g>
+
+        <!-- stair: far edge, drawn before the deck so it reads as going down behind -->
+        <g opacity=".92">
+          <line x1="306" y1="97" x2="135" y2="182" stroke="#64748b" stroke-width="5"/>
+          <line x1="324" y1="106" x2="153" y2="191" stroke="#64748b" stroke-width="5"/>
+          <g stroke="#c8873f" stroke-width="7" stroke-linecap="round">
+            <line x1="294" y1="107" x2="312" y2="116"/><line x1="273" y1="118" x2="291" y2="127"/>
+            <line x1="252" y1="128" x2="270" y2="137"/><line x1="231" y1="139" x2="249" y2="148"/>
+            <line x1="210" y1="149" x2="228" y2="158"/><line x1="189" y1="160" x2="207" y2="169"/>
+            <line x1="168" y1="170" x2="186" y2="179"/><line x1="147" y1="181" x2="165" y2="190"/>
+          </g>
+          <line x1="301" y1="67" x2="130" y2="152" stroke="#94a3b8" stroke-width="3"/>
+          <line x1="301" y1="67" x2="306" y2="97" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="130" y1="152" x2="135" y2="182" stroke="#94a3b8" stroke-width="2"/>
+        </g>
+
+        <!-- posts -->
+        <g stroke="#a8b4bf" stroke-width="12" stroke-linecap="butt">
+          <line x1="420" y1="262" x2="420" y2="105"/>
+          <line x1="294" y1="325" x2="294" y2="168"/>
+          <line x1="546" y1="325" x2="546" y2="168"/>
+          <line x1="420" y1="388" x2="420" y2="231"/>
+        </g>
+        <!-- X-bracing on the three visible faces -->
+        <g stroke="#5b6b7b" stroke-width="3">
+          <line x1="420" y1="388" x2="546" y2="168"/><line x1="546" y1="325" x2="420" y2="231"/>
+          <line x1="546" y1="325" x2="420" y2="105"/><line x1="420" y1="262" x2="546" y2="168"/>
+          <line x1="420" y1="388" x2="294" y2="168"/><line x1="294" y1="325" x2="420" y2="231"/>
+        </g>
+
+        <!-- deck slab -->
+        <polygon points="420,273 630,168 630,154 420,259" fill="#8a5a20"/>
+        <polygon points="420,273 210,168 210,154 420,259" fill="#a06a28"/>
+        <polygon points="420,259 630,154 420,49 210,154" fill="url(#deckG)" stroke="#7d4f18" stroke-width="1.6"/>
+        <g clip-path="url(#deckClip)" stroke="#9c631f" stroke-width="1" opacity=".7">
+          <line x1="245" y1="136" x2="455" y2="31"/><line x1="280" y1="119" x2="490" y2="14"/>
+          <line x1="210" y1="154" x2="420" y2="49"/><line x1="315" y1="171" x2="525" y2="66"/>
+          <line x1="350" y1="189" x2="560" y2="84"/><line x1="385" y1="206" x2="595" y2="101"/>
+          <line x1="420" y1="224" x2="630" y2="119"/>
+        </g>
+
+        <!-- tent, ~2.2 m footprint centred on the deck -->
+        <g clip-path="url(#deckClip)"><ellipse cx="420" cy="154" rx="154" ry="77" fill="#0d9488" opacity=".22"/></g>
+        <path d="M266,154 C266,44 574,44 574,154 Z" fill="url(#tentG)" stroke="#0f766e" stroke-width="1.8"/>
+        <path d="M420,154 C398,154 388,176 391,200 L449,200 C452,176 442,154 420,154 Z" fill="#0b3b37" opacity=".5"/>
+        <path d="M300,140 C330,96 510,96 540,140" fill="none" stroke="#ccfbf1" stroke-width="1.6" opacity=".7"/>
+
+        <!-- palupo: front-edge midpoint, in front of the tent -->
+        <line x1="525" y1="207" x2="525" y2="53" stroke="#475569" stroke-width="7"/>
+        <rect x="518" y="196" width="14" height="22" fill="#334155"/>
+        <circle cx="525" cy="53" r="5.5" fill="#1e293b"/>
+
+        <!-- tarp -->
+        <polygon points="525,53 672,374 518,451" fill="#38bdf8" fill-opacity=".3" stroke="#0284c7" stroke-width="1.8"/>
+        <line x1="525" y1="53" x2="630" y2="154" stroke="#0284c7" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <line x1="525" y1="53" x2="420" y2="259" stroke="#0284c7" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <g fill="#0284c7"><circle cx="672" cy="374" r="4"/><circle cx="518" cy="451" r="4"/></g>
+
+        <!-- callouts -->
+        <g class="lbl">
+          <line x1="537" y1="53" x2="600" y2="40" stroke="#334155" stroke-width="1"/>
+          <text x="606" y="38">Palupo</text>
+          <text x="606" y="54" class="sm">removable steel tarp pole</text>
+          <text x="690" y="392">Tarp, staked to ground</text>
+          <line x1="686" y1="388" x2="676" y2="376" stroke="#334155" stroke-width="1"/>
+          <text x="20" y="214">45° stair, far edge</text>
+          <text x="20" y="230" class="sm">bottom step lifts out</text>
+          <text x="600" y="250">X-bracing, 3 faces</text>
+          <text x="600" y="266" class="sm">this is what stops the sway</text>
+          <line x1="596" y1="246" x2="530" y2="250" stroke="#334155" stroke-width="1"/>
+          <text x="20" y="420">Grade beam (buried)</text>
+          <text x="20" y="436" class="sm">ties all 4 footings into one</text>
+          <text x="20" y="452" class="sm">1.8 × 1.8 m rigid base</text>
+          <line x1="180" y1="415" x2="330" y2="360" stroke="#334155" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="600" y="150">3.0 × 3.0 m deck</text>
+          <text x="600" y="166" class="sm">2.0–2.4 m tent leaves a walk margin</text>
+          <line x1="596" y1="146" x2="560" y2="130" stroke="#334155" stroke-width="1"/>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:var(--wood)"></i>treated lumber</span>
+        <span><i style="background:var(--steel)"></i>steel frame &amp; bracing</span>
+        <span><i style="background:var(--conc)"></i>concrete post / footing</span>
+        <span><i style="background:#38bdf8"></i>tarp</span>
+      </div>
+    </div>
+
+    <!-- PLAN -->
+    <div class="diagramwrap">
+      <h3>2 · Framing plan (viewed from above) — scale 140 px = 1 m</h3>
+      <svg viewBox="0 0 1010 650" role="img" aria-label="Framing plan showing 3 by 3 metre deck, four posts on a 1.8 metre grid inset 600 mm, main beams, joists, palupo and stair">
+        <rect x="0" y="0" width="1010" height="650" fill="#fff"/>
+        <!-- deck outline -->
+        <rect x="200" y="80" width="420" height="420" fill="#fdf6ec" stroke="#8a5a20" stroke-width="2.5"/>
+        <!-- joists at 400 -->
+        <g stroke="#c8873f" stroke-width="5" opacity=".55">
+          <line x1="228" y1="80" x2="228" y2="500"/><line x1="284" y1="80" x2="284" y2="500"/>
+          <line x1="340" y1="80" x2="340" y2="500"/><line x1="396" y1="80" x2="396" y2="500"/>
+          <line x1="452" y1="80" x2="452" y2="500"/><line x1="508" y1="80" x2="508" y2="500"/>
+          <line x1="564" y1="80" x2="564" y2="500"/>
+        </g>
+        <!-- perimeter rim beam -->
+        <rect x="200" y="80" width="420" height="420" fill="none" stroke="#475569" stroke-width="7"/>
+        <!-- main beams -->
+        <line x1="200" y1="164" x2="620" y2="164" stroke="#334155" stroke-width="11"/>
+        <line x1="200" y1="416" x2="620" y2="416" stroke="#334155" stroke-width="11"/>
+        <!-- stub ties to rim for palupo + stair -->
+        <line x1="410" y1="80" x2="410" y2="164" stroke="#475569" stroke-width="7"/>
+        <line x1="410" y1="416" x2="410" y2="500" stroke="#475569" stroke-width="7"/>
+        <!-- posts -->
+        <g>
+          <circle cx="284" cy="164" r="11" fill="#fff" stroke="#0f766e" stroke-width="4"/>
+          <circle cx="536" cy="164" r="11" fill="#fff" stroke="#0f766e" stroke-width="4"/>
+          <circle cx="284" cy="416" r="11" fill="#fff" stroke="#0f766e" stroke-width="4"/>
+          <circle cx="536" cy="416" r="11" fill="#fff" stroke="#0f766e" stroke-width="4"/>
+        </g>
+        <!-- grade beam dashed -->
+        <rect x="284" y="164" width="252" height="252" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="7 5" opacity=".8"/>
+        <!-- palupo -->
+        <circle cx="410" cy="80" r="9" fill="#475569"/>
+        <circle cx="410" cy="80" r="15" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="3 3"/>
+        <!-- stair -->
+        <g>
+          <rect x="368" y="500" width="84" height="130" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+          <g stroke="#64748b" stroke-width="1.6">
+            <line x1="368" y1="516" x2="452" y2="516"/><line x1="368" y1="532" x2="452" y2="532"/>
+            <line x1="368" y1="548" x2="452" y2="548"/><line x1="368" y1="564" x2="452" y2="564"/>
+            <line x1="368" y1="580" x2="452" y2="580"/><line x1="368" y1="596" x2="452" y2="596"/>
+            <line x1="368" y1="612" x2="452" y2="612"/>
+          </g>
+        </g>
+        <!-- tie-down eyes -->
+        <g fill="#b91c1c">
+          <circle cx="212" cy="92" r="4"/><circle cx="608" cy="92" r="4"/>
+          <circle cx="212" cy="488" r="4"/><circle cx="608" cy="488" r="4"/>
+          <circle cx="410" cy="488" r="4"/><circle cx="212" cy="290" r="4"/><circle cx="608" cy="290" r="4"/>
+        </g>
+        <!-- dimensions: top -->
+        <g stroke="#475569" stroke-width="1">
+          <line x1="200" y1="52" x2="620" y2="52"/>
+          <line x1="200" y1="46" x2="200" y2="58"/><line x1="620" y1="46" x2="620" y2="58"/>
+          <line x1="200" y1="30" x2="284" y2="30"/><line x1="284" y1="30" x2="536" y2="30"/><line x1="536" y1="30" x2="620" y2="30"/>
+          <line x1="200" y1="24" x2="200" y2="36"/><line x1="284" y1="24" x2="284" y2="36"/>
+          <line x1="536" y1="24" x2="536" y2="36"/><line x1="620" y1="24" x2="620" y2="36"/>
+        </g>
+        <text class="dimtxt" x="410" y="48" text-anchor="middle">3000 overall</text>
+        <text class="dimtxt" x="242" y="26" text-anchor="middle">600</text>
+        <text class="dimtxt" x="410" y="26" text-anchor="middle">1800 post grid</text>
+        <text class="dimtxt" x="578" y="26" text-anchor="middle">600</text>
+        <!-- dimensions: left -->
+        <g stroke="#475569" stroke-width="1">
+          <line x1="168" y1="80" x2="168" y2="500"/>
+          <line x1="162" y1="80" x2="174" y2="80"/><line x1="162" y1="500" x2="174" y2="500"/>
+          <line x1="146" y1="164" x2="146" y2="416"/>
+          <line x1="140" y1="164" x2="152" y2="164"/><line x1="140" y1="416" x2="152" y2="416"/>
+        </g>
+        <text class="dimtxt" x="164" y="295" text-anchor="middle" transform="rotate(-90 164 295)">3000</text>
+        <text class="dimtxt" x="142" y="295" text-anchor="middle" transform="rotate(-90 142 295)">1800</text>
+        <!-- joist spacing note -->
+        <g stroke="#475569" stroke-width="1"><line x1="228" y1="536" x2="284" y2="536"/><line x1="228" y1="530" x2="228" y2="542"/><line x1="284" y1="530" x2="284" y2="542"/></g>
+        <text class="dimtxt" x="256" y="554" text-anchor="middle">400 o.c.</text>
+        <!-- labels -->
+        <g class="lbl">
+          <text x="650" y="168">Main beam — 50 × 75 × 2.0 RHS</text>
+          <text x="650" y="184" class="sm">75 mm dimension vertical, sits on the posts</text>
+          <text x="650" y="420">Main beam (2nd)</text>
+          <text x="650" y="90">Perimeter rim — 50 × 50 × 2.0 SHS</text>
+          <text x="650" y="106" class="sm">stiffens the cantilever edge, deck screws land here</text>
+          <text x="650" y="300">Joists — 2 × 4 treated, 400 mm o.c.</text>
+          <text x="650" y="316" class="sm">span 1800 between beams, 600 overhang each end</text>
+          <text x="470" y="76">Palupo sleeve</text>
+          <text x="470" y="618">Stair down, 45°</text>
+          <text x="60" y="580">● tie-down eye bolts (7 off) —</text>
+          <text x="60" y="596" class="sm">you cannot stake a tent into a deck; guys clip here</text>
+          <text x="60" y="140">Dashed square = grade beam</text>
+          <text x="60" y="156" class="sm">buried, ties all 4 footings together</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#334155"></i>main beam 50×75×2.0</span>
+        <span><i style="background:#475569"></i>rim &amp; stubs 50×50×2.0</span>
+        <span><i style="background:var(--wood)"></i>joists 2×4 @ 400</span>
+        <span><i style="background:#0f766e"></i>post / grade beam</span>
+      </div>
+    </div>
+
+    <!-- ELEVATION -->
+    <div class="diagramwrap">
+      <h3>3 · Side elevation — scale 80 px = 1 m</h3>
+      <svg viewBox="0 0 1010 610" role="img" aria-label="Side elevation showing the 8 foot height, footings and grade beam, X-bracing, deck, tent, palupo with tarp on the right and the 45 degree stair on the left">
+        <rect x="0" y="0" width="1010" height="610" fill="#fff"/>
+        <rect x="0" y="430" width="1010" height="180" fill="#f1ede6"/>
+        <line x1="0" y1="430" x2="1010" y2="430" stroke="#8a7a62" stroke-width="2"/>
+        <g stroke="#c9bda6" stroke-width="1">
+          <line x1="30" y1="430" x2="10" y2="450"/><line x1="90" y1="430" x2="70" y2="450"/>
+          <line x1="150" y1="430" x2="130" y2="450"/><line x1="700" y1="430" x2="680" y2="450"/>
+          <line x1="780" y1="430" x2="760" y2="450"/><line x1="860" y1="430" x2="840" y2="450"/>
+          <line x1="940" y1="430" x2="920" y2="450"/>
+        </g>
+
+        <!-- footings, grade beam, pedestals -->
+        <rect x="245" y="462" width="66" height="40" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+        <rect x="389" y="462" width="66" height="40" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+        <rect x="311" y="470" width="78" height="24" fill="#dbe3ea" stroke="#0f766e" stroke-width="2"/>
+        <line x1="255" y1="482" x2="445" y2="482" stroke="#b91c1c" stroke-width="2"/>
+        <rect x="266" y="414" width="24" height="48" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+        <rect x="410" y="414" width="24" height="48" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+
+        <!-- columns -->
+        <rect x="270" y="251" width="16" height="163" fill="#dde4e8" stroke="#64748b" stroke-width="1.6"/>
+        <rect x="414" y="251" width="16" height="163" fill="#dde4e8" stroke="#64748b" stroke-width="1.6"/>
+        <!-- X-bracing -->
+        <g stroke="#5b6b7b" stroke-width="3.2">
+          <line x1="278" y1="414" x2="422" y2="251"/><line x1="422" y1="414" x2="278" y2="251"/>
+        </g>
+
+        <!-- stair, LEFT edge, 45 deg -->
+        <g>
+          <line x1="230" y1="251" x2="35" y2="430" stroke="#64748b" stroke-width="5"/>
+          <g stroke="#c8873f" stroke-width="6">
+            <line x1="212" y1="253" x2="229" y2="253"/><line x1="190" y1="273" x2="207" y2="273"/>
+            <line x1="168" y1="293" x2="185" y2="293"/><line x1="146" y1="313" x2="163" y2="313"/>
+            <line x1="124" y1="333" x2="141" y2="333"/><line x1="102" y1="353" x2="119" y2="353"/>
+            <line x1="80" y1="373" x2="97" y2="373"/><line x1="58" y1="393" x2="75" y2="393"/>
+          </g>
+          <line x1="230" y1="211" x2="35" y2="390" stroke="#94a3b8" stroke-width="3"/>
+          <g stroke="#94a3b8" stroke-width="2.4">
+            <line x1="180" y1="242" x2="180" y2="283"/><line x1="100" y1="316" x2="100" y2="357"/>
+          </g>
+          <rect x="34" y="406" width="34" height="10" fill="#fde68a" stroke="#b45309" stroke-width="1.6"/>
+          <rect x="22" y="430" width="48" height="22" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+        </g>
+
+        <!-- deck -->
+        <rect x="230" y="235" width="240" height="16" fill="#94a3b8" stroke="#475569" stroke-width="1.6"/>
+        <rect x="230" y="227" width="240" height="8" fill="#c8873f" stroke="#8a5a20" stroke-width="1.2"/>
+        <rect x="230" y="221" width="6" height="6" fill="#8a5a20"/><rect x="464" y="221" width="6" height="6" fill="#8a5a20"/>
+
+        <!-- tent -->
+        <path d="M268,227 C268,146 432,146 432,227 Z" fill="#14b8a6" fill-opacity=".75" stroke="#0f766e" stroke-width="1.6"/>
+
+        <!-- palupo, RIGHT edge (opposite the stair) -->
+        <rect x="466" y="51" width="8" height="176" fill="#64748b" stroke="#334155" stroke-width="1.2"/>
+        <rect x="462" y="221" width="16" height="32" fill="none" stroke="#334155" stroke-width="2"/>
+        <circle cx="470" cy="51" r="5" fill="#1e293b"/>
+
+        <!-- tarp: ridge over the tent + overhang past the edge -->
+        <polygon points="470,51 230,213 230,225 470,63" fill="#38bdf8" fill-opacity=".35" stroke="#0284c7" stroke-width="1.5"/>
+        <polygon points="470,51 578,196 578,208 470,63" fill="#38bdf8" fill-opacity=".35" stroke="#0284c7" stroke-width="1.5"/>
+        <line x1="578" y1="202" x2="624" y2="428" stroke="#0284c7" stroke-width="2" stroke-dasharray="5 4"/>
+        <polygon points="618,422 629,430 616,433" fill="#0284c7"/>
+
+        <!-- vertical dimensions -->
+        <g stroke="#475569" stroke-width="1">
+          <line x1="524" y1="51" x2="524" y2="227"/><line x1="518" y1="51" x2="530" y2="51"/><line x1="518" y1="227" x2="530" y2="227"/>
+          <line x1="666" y1="235" x2="666" y2="430"/><line x1="660" y1="235" x2="672" y2="235"/><line x1="660" y1="430" x2="672" y2="430"/>
+          <line x1="714" y1="430" x2="714" y2="502"/><line x1="708" y1="430" x2="720" y2="430"/><line x1="708" y1="502" x2="720" y2="502"/>
+        </g>
+        <text class="dimtxt" x="518" y="139" text-anchor="middle" transform="rotate(-90 518 139)">2200 palupo</text>
+        <text class="dimtxt" x="660" y="332" text-anchor="middle" transform="rotate(-90 660 332)">2440 (8 ft) to deck top</text>
+        <text class="dimtxt" x="708" y="466" text-anchor="middle" transform="rotate(-90 708 466)">900 footing</text>
+
+        <!-- horizontal dimensions -->
+        <g stroke="#475569" stroke-width="1">
+          <line x1="230" y1="560" x2="470" y2="560"/><line x1="230" y1="554" x2="230" y2="566"/><line x1="470" y1="554" x2="470" y2="566"/>
+          <line x1="35" y1="530" x2="230" y2="530"/><line x1="35" y1="524" x2="35" y2="536"/><line x1="230" y1="524" x2="230" y2="536"/>
+          <line x1="278" y1="590" x2="422" y2="590"/><line x1="278" y1="584" x2="278" y2="596"/><line x1="422" y1="584" x2="422" y2="596"/>
+        </g>
+        <text class="dimtxt" x="350" y="578" text-anchor="middle">3000 deck</text>
+        <text class="dimtxt" x="132" y="548" text-anchor="middle">2440 stair run (45°)</text>
+        <text class="dimtxt" x="350" y="608" text-anchor="middle">1800 post grid</text>
+
+        <!-- callouts -->
+        <g class="lbl">
+          <text x="760" y="58">Tarp off the palupo</text>
+          <text x="760" y="74" class="sm">ridge over the tent, overhang staked down</text>
+          <line x1="756" y1="54" x2="640" y2="120" stroke="#334155" stroke-width="1"/>
+          <text x="760" y="180">Deck + 50 mm toe-kerb</text>
+          <text x="760" y="196" class="sm">no railing, as you asked — the kerb stops</text>
+          <text x="760" y="212" class="sm">a mattress or bag sliding off</text>
+          <text x="760" y="288">4" PVC + reinforced concrete column</text>
+          <text x="760" y="304" class="sm">4 × 10 mm bars, 6 mm ties @ 150</text>
+          <line x1="756" y1="284" x2="440" y2="300" stroke="#334155" stroke-width="1"/>
+          <text x="760" y="366">X-bracing 25 × 25 × 1.5</text>
+          <text x="760" y="382" class="sm">3 faces braced; stair face left open</text>
+          <line x1="756" y1="362" x2="400" y2="350" stroke="#334155" stroke-width="1"/>
+          <text x="760" y="470">600 × 600 × 300 footings + grade beam</text>
+          <text x="760" y="486" class="sm">poured monolithic, in one session</text>
+          <line x1="756" y1="466" x2="470" y2="480" stroke="#334155" stroke-width="1"/>
+          <text x="16" y="392" class="sm">lift-out</text>
+          <text x="16" y="406" class="sm">bottom step</text>
+          <text x="22" y="470" class="sm">stair landing pad</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#dde4e8"></i>concrete column</span>
+        <span><i style="background:#475569"></i>steel</span>
+        <span><i style="background:var(--wood)"></i>lumber</span>
+        <span><i style="background:#14b8a6"></i>tent</span>
+        <span><i style="background:#38bdf8"></i>tarp</span>
+      </div>
+    </div>
+
+    <!-- DETAILS -->
+    <div class="diagramwrap">
+      <h3>4 · The three details that matter</h3>
+      <svg viewBox="0 0 900 400" role="img" aria-label="Three construction details: column cross section, beam to column cap plate connection, and footing with grade beam">
+        <rect x="0" y="0" width="900" height="400" fill="#fff"/>
+
+        <!-- A: column cross-section -->
+        <text class="lbl" x="20" y="24">A · Column cross-section (4" pipe)</text>
+        <circle cx="140" cy="150" r="88" fill="#eef2f4" stroke="#475569" stroke-width="7"/>
+        <circle cx="140" cy="150" r="80" fill="#dde4e8"/>
+        <circle cx="140" cy="150" r="52" fill="none" stroke="#b91c1c" stroke-width="4"/>
+        <g fill="#0f766e">
+          <circle cx="140" cy="98" r="11"/><circle cx="192" cy="150" r="11"/>
+          <circle cx="140" cy="202" r="11"/><circle cx="88" cy="150" r="11"/>
+        </g>
+        <g stroke="#475569" stroke-width="1">
+          <line x1="140" y1="150" x2="238" y2="62"/><line x1="192" y1="150" x2="250" y2="150"/>
+          <line x1="164" y1="196" x2="250" y2="228"/><line x1="72" y1="104" x2="30" y2="54"/>
+        </g>
+        <text class="lbl sm" x="240" y="58">100 mm inside dia.</text>
+        <text class="lbl sm" x="254" y="154">4 × 10 mm deformed bars</text>
+        <text class="lbl sm" x="254" y="232">6 mm tie @ 150 mm o.c.</text>
+        <text class="lbl sm" x="10" y="46">PVC stays on — permanent form + rain jacket</text>
+        <text class="lbl sm" x="20" y="272">Clear gap between bars ≈ 37 mm →</text>
+        <text class="lbl sm" x="20" y="288" style="fill:#b91c1c;font-weight:700">use 3/8" gravel and a wet mix, or it voids.</text>
+        <text class="lbl sm" x="20" y="308">Steel ratio ρ = 4.0% (code range 1–8%) ✓</text>
+
+        <!-- B: cap plate -->
+        <text class="lbl" x="310" y="24">B · Beam-to-column cap</text>
+        <rect x="376" y="70" width="120" height="34" fill="#94a3b8" stroke="#334155" stroke-width="2"/>
+        <text class="lbl w" x="436" y="92" text-anchor="middle" style="font-size:11px">50 × 75 beam</text>
+        <rect x="392" y="104" width="88" height="10" fill="#475569" stroke="#1e293b" stroke-width="1.5"/>
+        <text class="lbl sm" x="500" y="113">150 × 150 × 6 mm plate, welded all round</text>
+        <rect x="412" y="114" width="48" height="150" fill="#dde4e8" stroke="#475569" stroke-width="5"/>
+        <g stroke="#0f766e" stroke-width="5">
+          <line x1="422" y1="114" x2="422" y2="264"/><line x1="450" y1="114" x2="450" y2="264"/>
+        </g>
+        <g fill="#b91c1c">
+          <rect x="398" y="100" width="7" height="18" rx="2"/><rect x="467" y="100" width="7" height="18" rx="2"/>
+        </g>
+        <text class="lbl sm" x="500" y="140">Column bars bent 90° and welded</text>
+        <text class="lbl sm" x="500" y="156">to the underside of the plate —</text>
+        <text class="lbl sm" x="500" y="172" style="fill:#b91c1c;font-weight:700">the beam must not just sit on top.</text>
+        <text class="lbl sm" x="500" y="196">2 × 12 mm anchor bolts each side,</text>
+        <text class="lbl sm" x="500" y="212">cast in with the column pour.</text>
+        <text class="lbl sm" x="500" y="240">Braces land on the same plate,</text>
+        <text class="lbl sm" x="500" y="256">so the load path never breaks.</text>
+        <line x1="412" y1="180" x2="380" y2="180" stroke="#475569" stroke-width="1"/>
+        <text class="lbl sm" x="300" y="184">PVC + concrete</text>
+
+        <!-- C: footing + grade beam -->
+        <text class="lbl" x="20" y="340" style="font-size:12px">C · Footing + grade beam (buried) — the anti-tip detail</text>
+        <rect x="20" y="352" width="800" height="1" fill="none"/>
+        <g transform="translate(20,340)">
+          <line x1="0" y1="14" x2="470" y2="14" stroke="#8a7a62" stroke-width="2"/>
+          <rect x="30" y="30" width="70" height="26" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+          <rect x="330" y="30" width="70" height="26" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+          <rect x="100" y="36" width="230" height="14" fill="#dbe3ea" stroke="#0f766e" stroke-width="2"/>
+          <line x1="40" y1="43" x2="390" y2="43" stroke="#b91c1c" stroke-width="2"/>
+          <rect x="56" y="14" width="18" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="1.2"/>
+          <rect x="356" y="14" width="18" height="16" fill="#cbd5e1" stroke="#64748b" stroke-width="1.2"/>
+          <text class="lbl sm" x="420" y="46">2 × 10 mm bars continuous</text>
+          <text class="lbl sm" x="420" y="24">1800 c/c</text>
+          <text class="lbl sm" x="30" y="84">600 × 600 × 300 footing</text><text class="lbl sm" x="420" y="66">grade beam 200 × 300</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#0f766e"></i>reinforcement</span>
+        <span><i style="background:#b91c1c"></i>ties / anchors</span>
+        <span><i style="background:#475569"></i>steel plate &amp; tube</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIZING ===== -->
+  <section id="sizing">
+    <h2><span class="ic">🎚</span>Size it for your case</h2>
+    <p class="lead">Drag to change the deck or the height. The inset comes from the balanced-moment rule <b>c = L ÷ 4.828</b> — the point where the cantilever moment equals the mid-span moment, which is the smallest beam you can get away with.</p>
+    <div class="card">
+      <div class="calc">
+        <div>
+          <label>Deck side: <span class="val" id="sO">3.0</span> m square</label>
+          <input type="range" id="s" min="2.4" max="4.2" step="0.1" value="3.0" oninput="calc()">
+          <label>Deck height above grade: <span class="val" id="hO">8.0</span> ft</label>
+          <input type="range" id="h" min="5" max="10" step="0.5" value="8" oninput="calc()">
+          <label>People on it at once: <span class="val" id="pO">4</span></label>
+          <input type="range" id="p" min="1" max="8" step="1" value="4" oninput="calc()">
+        </div>
+        <div class="readout">
+          <div class="ro"><div class="k">Post inset from each edge</div><div class="v" id="r1">—</div><div class="n">c = side ÷ 4.828</div></div>
+          <div class="ro"><div class="k">Post grid (square)</div><div class="v" id="r2">—</div><div class="n">centre-to-centre both ways</div></div>
+          <div class="ro"><div class="k">Main beam size</div><div class="v" id="r3">—</div><div class="n">deep dimension vertical</div></div>
+          <div class="ro"><div class="k">Concrete to mix</div><div class="v" id="r4">—</div><div class="n">columns + footings + grade beam</div></div>
+          <div class="ro"><div class="k">Materials estimate</div><div class="v" id="r5">—</div><div class="n">excludes labour</div></div>
+          <div class="ro"><div class="k">Tip margin, everyone on one edge</div><div class="v" id="r6">—</div><div class="n">hinge at the post line — want ≥ 3×</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top:14px"><b>Read the last box.</b> If the tip margin drops under 3×, either widen the post grid or make the footings bigger. Those are the only two knobs — adding posts does not fix tipping, it only splits the load.</div>
+  </section>
+
+  <!-- ===== PICKS ===== -->
+  <section id="picks">
+    <h2><span class="ic">🛒</span>The choices you actually have to make</h2>
+    <p class="lead">Structural material (pipe, rebar, cement, tubular steel, lumber) comes from a local hardware and lumberyard — not online. Only the consumables below are worth buying on Shopee. Prices are indicative PH ranges and move with stock and the peso.</p>
+    <div class="kits">
+      <div class="kit">
+        <div class="tag">Decision 1 · Deck surface</div>
+        <h4>Plank deck, not plywood</h4>
+        <p>2 × 4 treated planks with 5 mm gaps drain and air-dry, and last 10 years-plus outdoors. Marine plywood is ₱1,000 cheaper and smoother but delaminates at the edges in a few PH rainy seasons. Best of both: plank deck outdoors + a light plywood or rubber mat you lay on top only when the tent is pitched, stored indoors the rest of the time.</p>
+        <div class="price">₱4,350 – ₱6,500 planks · ₱3,300 – ₱4,300 ply</div>
+      </div>
+      <div class="kit">
+        <div class="tag">Decision 2 · Stair</div>
+        <h4>Fixed 45° stair, lift-out bottom step</h4>
+        <p>8 ft of rise at 45° needs 2.44 m of run and a 3.45 m stringer — too long and heavy to fold neatly under a 3 m deck. Make it fixed and take the bottom 600 mm out instead: nothing climbs up, and it costs ₱600 in pins. A hinged rope-and-pulley "drawbridge" stair works and looks great but adds ₱1,500–2,800 and something that can seize.</p>
+        <div class="price">₱5,750 – ₱8,550 fixed · +₱1,500 – ₱2,800 hinged</div>
+      </div>
+      <div class="kit">
+        <div class="tag">Decision 3 · Rust protection</div>
+        <h4>Red oxide + enamel, re-coat every 3 years</h4>
+        <p>Batangas is coastal — salt air eats untreated mild steel. Two coats of red oxide primer plus two of enamel costs ₱1,300–2,000 and buys 3 years before touch-up. Hot-dip galvanising the whole frame is ₱6,000–10,000 and lasts 15+ years with no maintenance. If the platform is within a kilometre of the shore, galvanising is the honest better buy.</p>
+        <div class="price">₱1,300 – ₱2,000 paint · ₱6,000 – ₱10,000 galvanised</div>
+        <a class="shoplink" target="_blank" rel="noopener" href="https://da.gd/1BDhO">Red oxide primer on Shopee →</a>
+      </div>
+      <div class="kit">
+        <div class="tag">Decision 4 · Tarp &amp; palupo</div>
+        <h4>One 4 × 5 m heavy trapal, guyed both ways</h4>
+        <p>The palupo is a 50 × 50 × 2.0 steel tube, 2.2 m tall, that drops into a welded sleeve at the middle of one rim beam — lift it straight out when you are done. Run two guy lines from its top back to the opposite deck corners so it cannot bend when the tarp catches wind. 4 × 5 m gives you an overhang past the deck edge so the rain lands off the platform.</p>
+        <div class="price">₱1,950 – ₱3,450 complete</div>
+        <a class="shoplink" target="_blank" rel="noopener" href="https://da.gd/TvfwY">Heavy trapal on Shopee →</a>
+      </div>
+      <div class="kit">
+        <div class="tag">Decision 5 · Wood treatment</div>
+        <h4>Two gallons, two coats, before assembly</h4>
+        <p>This is the difference between a deck that lasts 10 years and one that is powder in three. Coat every face and every cut end before the wood goes up — once it is screwed down you can never reach the contact faces, and that is exactly where the bukbok starts.</p>
+        <div class="price">₱2,200 – ₱3,200</div>
+        <a class="shoplink" target="_blank" rel="noopener" href="https://da.gd/ouTJOU">Wood preservative on Shopee →</a>
+      </div>
+      <div class="kit">
+        <div class="tag">Decision 6 · Tent tie-downs</div>
+        <h4>7 eye bolts through the rim beam</h4>
+        <p>The thing nobody plans for: you cannot drive a tent peg into a deck. Bolt seven 10 mm eye bolts through the perimeter rim — four corners, two side midpoints, one at the front — and the tent guys clip straight onto them. ₱400 of hardware that decides whether the tent stays put in a gust.</p>
+        <div class="price">₱400 – ₱800</div>
+        <a class="shoplink" target="_blank" rel="noopener" href="https://da.gd/6lV9I">Eye bolts on Shopee →</a>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:16px"><b>Check before buying:</b> ① 4" PVC prices swing wildly by series — sanitary/drainage grade is fine here since it is only formwork, so do not pay for pressure pipe. ② Ask the lumberyard for <b>3/8" washed gravel</b> specifically, not the usual 3/4". ③ Confirm your tent's actual footprint — a true 3 × 3 m tent leaves zero walking margin on a 3 × 3 m deck; 2.4–2.7 m is the comfortable size. ④ Tubular steel is sold by wall thickness; 1.0 mm is roofing gauge, you want <b>2.0 mm</b> for the beams.</div>
+  </section>
+
+  <!-- ===== BOM ===== -->
+  <section id="bom">
+    <h2><span class="ic">📋</span>Bill of materials</h2>
+    <p class="lead">Tap <b>"Got it"</b> as you buy — progress and remaining cost save in this browser. Rows marked <i>alternative</i> are swaps and are not counted in the totals.</p>
+    <div class="tools">
+      <div class="totals">
+        <div class="t">Still to buy<b id="remaining">₱0 – ₱0</b></div>
+        <div class="t">Full kit (retail)<b class="pk" id="fulltotal">₱0 – ₱0</b></div>
+        <div class="t">Bought<b id="boughtcount">0 / 0</b></div>
+      </div>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <table style="margin-top:14px">
+      <thead><tr><th style="width:34px">✓</th><th>Item</th><th class="c">Qty</th><th class="c">Price (₱)</th><th>Where to buy</th></tr></thead>
+      <tbody id="bomBody"></tbody>
+    </table>
+    <div class="costnote">💡 <b>Budget note:</b> the two places it is safe to save are the deck surface (plywood instead of planks, −₱1,000) and doing the digging, mixing and painting yourself (−₱8,000 of labour). The two places <b>not</b> to save are the <b>grade beam</b> and the <b>X-bracing</b> — together about ₱6,000, and they are what separate a solid platform from one that sways and eventually tips. Cutting either to save money is the classic way this build fails.</div>
+  </section>
+
+  <!-- ===== COSTING ===== -->
+  <section id="costing">
+    <h2><span class="ic">💰</span>Costing</h2>
+    <p class="lead">Materials from the list above, plus Philippine labour at typical provincial day rates. Figures are indicative and should be re-quoted locally before you commit.</p>
+    <table>
+      <thead><tr><th>Package</th><th class="c">Low</th><th class="c">High</th><th>What is in it</th></tr></thead>
+      <tbody>
+        <tr><td class="item-name">Foundation &amp; posts</td><td class="c price">₱11,250</td><td class="c price">₱17,230</td><td>PVC forms, rebar, ties, cement, sand, 3/8" gravel, tie wire, form lumber</td></tr>
+        <tr><td class="item-name">Steel frame &amp; bracing</td><td class="c price">₱11,000</td><td class="c price">₱16,150</td><td>Main beams, rim, stubs, X-bracing, cap plates, anchors, rods, discs, paint</td></tr>
+        <tr><td class="item-name">Deck</td><td class="c price">₱8,880</td><td class="c price">₱13,500</td><td>Joists, planks, toe-kerb, preservative, screws, tie-down eyes</td></tr>
+        <tr><td class="item-name">Stair</td><td class="c price">₱5,750</td><td class="c price">₱8,550</td><td>Stringers, treads, handrail, pins, landing pad</td></tr>
+        <tr><td class="item-name">Tarp &amp; palupo kit</td><td class="c price">₱1,950</td><td class="c price">₱3,450</td><td>Trapal, rope, turnbuckles, shackles</td></tr>
+        <tr style="font-weight:800"><td>Materials subtotal</td><td class="c price">₱38,830</td><td class="c price">₱58,880</td><td></td></tr>
+        <tr><td class="item-name">Labour — welder + 2 helpers<span class="item-note">10–14 days; welder ₱900–1,200/day, helper ₱550–700/day. Or contract it pakyaw.</span></td><td class="c price">₱22,000</td><td class="c price">₱34,000</td><td>Excavation, forms, pour, fabrication, erection, decking, painting</td></tr>
+        <tr style="font-weight:800;font-size:15px"><td>All-in total</td><td class="c price">₱60,830</td><td class="c price">₱92,880</td><td>Say <b>₱75,000 ± ₱12,000</b></td></tr>
+        <tr class="alt"><td class="item-name">Owner-build variant<span class="item-note">You dig, mix, paint and deck it yourself; hire a welder for 4 days of fabrication only.</span></td><td class="c price">₱47,800</td><td class="c price">₱67,700</td><td>Materials + ~₱9,000 welder</td></tr>
+      </tbody>
+    </table>
+    <div class="callout" style="margin-top:14px"><b>Where the money actually goes:</b> steel is 28% of materials, the deck 23%, foundation 29%, stair 15%. If the budget is tight, the stair is the item to phase — build the platform, use a borrowed ladder for a season, add the stair later. Do not phase the bracing or the grade beam; they have to be in before the first pour cures.</div>
+  </section>
+
+  <!-- ===== BUILD ===== -->
+  <section id="build">
+    <h2><span class="ic">🔧</span>Step-by-step</h2>
+    <p class="lead">Roughly 10–14 working days with three people, assuming a week of dry weather for the concrete. <button class="btn ghost" onclick="toggleStages(true)">Expand all</button> <button class="btn ghost" onclick="toggleStages(false)">Collapse all</button></p>
+
+    <details class="stage" open>
+      <summary><span class="num">1</span><span class="caret">▸</span> Set out and dig <span class="time">1–2 days</span></summary>
+      <div class="body"><ol>
+        <li>Mark the 3.0 × 3.0 m deck outline with batter boards and string. Check square by measuring the diagonals — both must read <b>4,243 mm</b>. Do not proceed until they match within 5 mm.</li>
+        <li>Mark the four post centres 600 mm in from each edge, giving a 1,800 × 1,800 mm square. Check those diagonals too: <b>2,546 mm</b>.</li>
+        <li>Dig four pits 600 × 600 mm, 900 mm deep. Connect them with a trench 200 mm wide × 300 mm deep running post-to-post — this is the grade beam and it must be continuous around all four sides.</li>
+        <li>If you hit soft, wet or filled soil, stop and go deeper until you reach firm ground, or widen the footings to 750 mm square. Soil is the one thing this drawing cannot know for you.</li>
+        <li>Compact the pit bottoms and lay 50 mm of gravel in each.</li>
+      </ol></div>
+    </details>
+
+    <details class="stage">
+      <summary><span class="num">2</span><span class="caret">▸</span> Cages, forms and the one big pour <span class="time">2 days + 7 days curing</span></summary>
+      <div class="body"><ol>
+        <li>Bend the footing mats: five 10 mm bars each way per footing, 550 mm long, wired at every crossing.</li>
+        <li>Build the four column cages: four 10 mm bars, 3.1 m long each (2.44 m column + 400 mm into the footing + 300 mm projecting above for the cap plate), with 6 mm circular ties at 150 mm centres. Wire every tie.</li>
+        <li>Thread the 4" PVC over each cage and cut it to length so the top finishes exactly at deck-underside level. Plumb each pipe two ways and brace it with scrap lumber — <b>once concrete is in, a leaning post stays leaning.</b></li>
+        <li>Lay the two continuous 10 mm bars in the grade beam trench, lapping them 400 mm into each footing cage.</li>
+        <li>Mix Class A 1:2:4 with <b>3/8" washed gravel</b> and a wet, flowable slump. Pour footings, grade beam and columns <b>in one session</b> — a cold joint at the base of a column is the exact place you do not want one.</li>
+        <li>Rod the column concrete in 300 mm lifts with a length of 10 mm bar. Tap the PVC with a rubber mallet as you go to bring air out.</li>
+        <li>Set the 12 mm anchor bolts in the wet column tops, and leave the four projecting rebar tails standing. Cure wet for 7 days before any load goes on.</li>
+      </ol></div>
+    </details>
+
+    <details class="stage">
+      <summary><span class="num">3</span><span class="caret">▸</span> Fabricate the steel on the ground <span class="time">2–3 days</span></summary>
+      <div class="body"><ol>
+        <li>Cut two main beams at 3,000 mm from the 50 × 75 × 2.0 tube. Cut the perimeter rim: four pieces of 50 × 50 × 2.0 at 3,000 mm, mitred at the corners.</li>
+        <li>Weld the rim into a 3.0 × 3.0 m square frame on flat ground. Check the diagonals again at 4,243 mm before the welds cool.</li>
+        <li>Weld the two main beams across it at 600 mm in from each edge, flush with the rim's underside.</li>
+        <li>Add the two 600 mm stub ties: one from the rim to the near beam at the front midpoint (for the palupo), one at the rear midpoint (for the stair).</li>
+        <li>Weld the palupo sleeve — a 300 mm length of 65 × 65 tube — vertically at the front stub junction, and drill a drain hole in its bottom so rainwater does not sit inside.</li>
+        <li>Weld the four 150 × 150 × 6 mm cap plates to the beam undersides, directly over where the posts will be.</li>
+        <li>Prime and paint everything now, while it is on the ground and reachable. Two coats red oxide, two coats enamel.</li>
+      </ol></div>
+    </details>
+
+    <details class="stage">
+      <summary><span class="num">4</span><span class="caret">▸</span> Lift, seat and brace <span class="time">1 day</span></summary>
+      <div class="body"><ol>
+        <li>Four people lift the frame onto the four columns. It weighs roughly 100 kg — do not do this with two.</li>
+        <li>Drop the cap plates over the anchor bolts, level the frame both ways with steel shims, then tighten.</li>
+        <li>Bend the four projecting column bars 90° and weld them to the underside of each cap plate. <b>This is the connection that makes it one structure instead of a table standing on four sticks.</b></li>
+        <li>Cut and fit the X-bracing from 25 × 25 × 1.5 tube: two diagonals per face, on three faces, leaving the stair face open. Each diagonal is about 2,910 mm.</li>
+        <li>Weld the brace ends to the cap plates at the top and to plates cast into the pedestals at the bottom. Touch up the paint on every weld.</li>
+        <li>Push hard on a corner at deck height. It should feel dead solid. If there is any perceptible sway, add the fourth face and live with the stair passing through it.</li>
+      </ol></div>
+    </details>
+
+    <details class="stage">
+      <summary><span class="num">5</span><span class="caret">▸</span> Deck it <span class="time">2 days</span></summary>
+      <div class="body"><ol>
+        <li>Coat every piece of lumber on all faces and both cut ends with preservative, two coats, and let it dry. Do this before anything is fixed.</li>
+        <li>Lay eight 2 × 4 joists across the two main beams at 400 mm centres, running the 3 m direction, with 600 mm overhanging past each beam. Screw through into the steel with self-drilling screws, or clip them with steel angles.</li>
+        <li>Lay the 2 × 4 deck planks across the joists with a consistent <b>5 mm gap</b> — use a screw shank as a spacer. Two screws per plank per joist.</li>
+        <li>Give the deck a 1% fall to one side so water always has somewhere to go.</li>
+        <li>Fix the 2 × 2 toe-kerb on edge around the whole perimeter. It is 50 mm tall, nearly invisible, and it is what stops a mattress or a bag sliding off an unrailed 8 ft deck.</li>
+        <li>Bolt the seven 10 mm eye bolts through the rim beam: four corners, two side midpoints, one at the front.</li>
+      </ol></div>
+    </details>
+
+    <details class="stage">
+      <summary><span class="num">6</span><span class="caret">▸</span> Stair, palupo, done <span class="time">2 days</span></summary>
+      <div class="body"><ol>
+        <li>Pour a 400 × 400 × 200 mm concrete pad where the stair lands, 2,440 mm out from the deck edge. Let it cure before loading.</li>
+        <li>Cut two 3,450 mm stringers from 50 × 75 tube. Mark nine tread positions: <b>271 mm rise, 271 mm going</b> — at 45° those are the same number, which makes the setting-out easy.</li>
+        <li>Weld tread angles, bolt on 2 × 8 treads, and weld a 25 × 25 handrail at 900 mm above the nosing line on at least one side.</li>
+        <li>Bolt the stringer tops to the rear stub tie and rim beam. Add two knee braces from the rim back to the nearest two columns — the stair's load must reach a post, not hang off the decking.</li>
+        <li>Make the bottom 600 mm a separate section joined with two drop-in pins, so you can lift it out and nothing climbs up while you are away.</li>
+        <li>Cut the palupo from 50 × 50 tube, 2,600 mm long — 2,200 mm above the deck, 400 mm down inside the sleeve. Weld an eye at the top and 300 mm down. Drop it in; it should be a snug slide fit, not hammered.</li>
+        <li>Rig the tarp: ridge line from the palupo eye, two guys from the top back to the opposite deck corners, and the outer corners staked to the ground clear of the deck.</li>
+      </ol></div>
+    </details>
+  </section>
+
+  <!-- ===== SAFETY ===== -->
+  <section id="safety">
+    <div class="safety">
+      <h2><span class="ic">⚠️</span>Safety &amp; pitfalls</h2>
+      <ul>
+        <li><b>Have a local structural engineer or an experienced builder look at this before you pour.</b> The numbers here are worked from standard loads and published Philippine material properties, and they are shown so you can check them — but nobody has seen your soil, and soil decides footings. An hour of a local engineer's time is the cheapest insurance in this project.</li>
+        <li><b>Tent and tarp come down before every typhoon — no exceptions.</b> Batangas is NSCP Zone II, 200 kph basic wind. With the tent up, a design storm generates roughly 3,400 kg·m of overturning against about 2,000 kg·m of resistance. Bare, it is around 500 against 2,000 and it rides out fine. Pull the palupo, strip the tarp, drop the tent.</li>
+        <li><b>Do not skip the grade beam or the bracing to save money.</b> Without the grade beam the four footings act separately, so only the deck's own ~200 kg resists: three people on one edge sits at a 1.25× margin. Tie them and it is about 14×. Without the bracing, the columns are effectively unrestrained flagpoles at a slenderness ratio near 195 — far outside any code limit. These two items are ~₱6,000 of a ₱75,000 build and they carry the whole safety case.</li>
+        <li><b>You removed the railing — so respect the edge.</b> 8 ft onto hard ground breaks bones. The 50 mm toe-kerb stops things sliding off but it will not stop a person. No sleeping with a head at the open edge, no alcohol on the deck at night, and think hard before letting small children up there unsupervised. If you ever change your mind, a 900 mm rail on three sides is about ₱4,500 in 25 × 25 tube and mesh.</li>
+        <li><b>Do not stand on the deck until the concrete has cured 7 days</b>, and do not load it fully for 28. Concrete reaches only about two-thirds of its strength in the first week.</li>
+        <li><b>Use 3/8" gravel in the columns.</b> With four 10 mm bars and ties inside a 100 mm pipe, standard 3/4" gravel bridges across the gaps and leaves voids you cannot see and cannot fix. This is the single most common way a nice-looking concrete-filled post turns out hollow.</li>
+        <li><b>Brace the PVC pipes plumb before pouring and check them twice.</b> A post that sets 20 mm out of plumb over 2.44 m will fight you at every later stage and there is no correcting it afterwards.</li>
+        <li><b>Coastal salt air.</b> Inspect the welds and touch up the paint every year, and re-coat fully every 3 years. If you skip it, the bracing connections rust first — and those are the ones holding the sway.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>Tent Platform build pack</b> — a 3 × 3 m elevated camping deck, 8 ft up, on four inset 4" concrete-filled posts, sized and costed for Batangas City, Philippines.</div>
+    Realistic outcome: a solid, dead-feeling platform that takes four adults and a tent, built by a welder and two helpers in about two weeks for roughly ₱75,000, lasting 10+ years with annual paint touch-ups. Structural figures are worked from standard residential loads (1.9 kPa live), NSCP 2015 Zone II wind for Batangas, and published Philippine material properties — shown openly so they can be checked, and they should be, by a local engineer who has seen your soil. Prices are indicative Philippine ranges from hardware price lists and Shopee gathered 16 September 2026; they shift with stock and the peso. Verify PVC series, tubular steel wall thickness and gravel size at the counter before buying.
+  </footer>
+</div>
+
+<script>
+/* ===== Sizing calculator ===== */
+function calc(){
+  const S = +document.getElementById('s').value;          // deck side, m
+  const Hft = +document.getElementById('h').value;         // height, ft
+  const P = +document.getElementById('p').value;           // people
+  const H = Hft * 0.3048;                                  // height, m
+  document.getElementById('sO').textContent = S.toFixed(1);
+  document.getElementById('hO').textContent = Hft.toFixed(1);
+  document.getElementById('pO').textContent = P;
+
+  const c    = S / 4.828;                                  // balanced-moment inset
+  const grid = S - 2*c;                                    // post c/c
+  const A    = S * S;
+
+  // main beam pick, by back-span
+  let beam = '50 × 100 × 3.0';
+  if (grid <= 1.6)      beam = '50 × 50 × 2.0';
+  else if (grid <= 2.0) beam = '50 × 75 × 2.0';
+  else if (grid <= 2.6) beam = '50 × 100 × 2.0';
+
+  // concrete: 4 columns + 4 footings + 4 grade-beam runs
+  const fw   = grid < 1.6 ? 0.75 : 0.60;                   // footing widens on a tight grid
+  const cols = Math.PI/4 * 0.10*0.10 * H * 4;
+  const foot = 4 * fw * fw * 0.30;
+  const gb   = 4 * grid * 0.20 * 0.30;
+  const vol  = cols + foot + gb;
+
+  // tip check about the post line, with the grade beam tying the base
+  const deckW  = 22 * A;                                   // ~22 kg/m2 of deck + frame
+  const baseW  = (foot + gb) * 2400;                       // buried concrete mass
+  // hinge taken at the post line (conservative: ignores footing width and soil bearing)
+  const restore = (deckW + baseW) * (grid/2);              // mass acts at the deck centre
+  const tipping = (P * 80) * c;                            // everyone out on the cantilever edge
+  const margin  = restore / tipping;
+
+  // materials estimate, anchored on the 3 m / 8 ft build at PHP 38,830 - 58,880
+  const mMin = Math.round((20000*(A/9) + 12000*(H/2.44) + 6800) / 100) * 100;
+  const mMax = Math.round((31000*(A/9) + 18000*(H/2.44) + 9900) / 100) * 100;
+
+  const peso = n => '₱' + n.toLocaleString('en-PH');
+  document.getElementById('r1').textContent = Math.round(c*1000) + ' mm';
+  document.getElementById('r2').textContent = Math.round(grid*1000) + ' × ' + Math.round(grid*1000) + ' mm';
+  document.getElementById('r3').textContent = beam;
+  document.getElementById('r4').textContent = vol.toFixed(2) + ' m³';
+  document.getElementById('r5').textContent = peso(mMin) + ' – ' + peso(mMax);
+  const el = document.getElementById('r6');
+  el.textContent = margin.toFixed(1) + '×';
+  el.style.color = margin >= 3 ? 'var(--ok)' : (margin >= 2 ? 'var(--warn)' : 'var(--danger)');
+}
+if(document.getElementById('s')) calc();
+
+/* ===== Bill-of-materials engine ===== */
+const HW  = 'Local hardware / lumberyard';
+const BOM = [
+  {id:'g1', grp:'Foundation &amp; posts'},
+  {id:'f1', name:'PVC pipe 4" (100 mm) × 3 m', note:'Sanitary / drainage series is fine — it is only formwork. Do not pay for pressure pipe.', qty:'4 pcs', min:2400, max:5200, where:HW, link:'#', linktext:'Ask for S-1000 or orange sanitary', must:1},
+  {id:'f2', name:'Deformed bar 10 mm × 6 m', note:'16 lengths: 9 for column cages, 4 for footing mats, 3 for the grade beam.', qty:'16 pcs', min:2560, max:3200, where:HW, link:'#', linktext:'Sold per 6 m length', must:1},
+  {id:'f3', name:'Plain round bar 6 mm × 6 m', note:'Column ties at 150 mm centres — about 17 ties per post.', qty:'8 pcs', min:640, max:880, where:HW, link:'#', linktext:'6 mm RSB', must:1},
+  {id:'f4', name:'Portland cement 40 kg', note:'Class A 1:2:4 mix for ~1.2 m³ total. Type 1 or 1P both fine.', qty:'12 bags', min:2880, max:3600, where:HW, link:'#', linktext:'Holcim / Republic / Eagle', must:1},
+  {id:'f5', name:'Washed sand', note:'Order by the cubic metre; a small delivery beats bagged sand on price.', qty:'0.7 m³', min:600, max:1100, where:HW, link:'#', linktext:'Lumberyard / aggregates supplier'},
+  {id:'f6', name:'Gravel — 3/8" washed', note:'Specifically 3/8", NOT the usual 3/4". Larger stone bridges inside the 4" pipe and leaves voids.', qty:'1.3 m³', min:1300, max:1950, where:HW, link:'#', linktext:'Say "3/8 washed"', must:1},
+  {id:'f7', name:'Tie wire #16', note:'For the cages and ties. Buy more than you think.', qty:'3 kg', min:270, max:400, where:HW, link:'#', linktext:'Sold per kg'},
+  {id:'f8', name:'Form lumber — coco 1 × 8 × 10 ft', note:'Footing and pedestal boxing. Reusable, and it becomes your bracing for the plumb-up.', qty:'6 pcs', min:600, max:900, where:HW, link:'#', linktext:'Lumberyard'},
+
+  {id:'g2', grp:'Steel frame &amp; bracing'},
+  {id:'s1', name:'RHS 50 × 75 × 2.0 mm × 6 m — main beams', note:'Two 3,000 mm beams cut from one length, zero waste. 75 mm dimension goes vertical.', qty:'1 pc', min:1500, max:2100, where:HW, link:'#', linktext:'"2 × 3 tubular, 2 mm"', must:1},
+  {id:'s2', name:'SHS 50 × 50 × 2.0 mm × 6 m — rim, stubs, knee braces', note:'12 m of perimeter rim plus the two 600 mm stubs and the stair knee braces.', qty:'3 pcs', min:3300, max:4500, where:HW, link:'#', linktext:'"2 × 2 tubular, 2 mm"', must:1},
+  {id:'s3', name:'SHS 25 × 25 × 1.5 mm × 6 m — X-bracing', note:'Six diagonals at ~2,910 mm, three braced faces. This is what kills the sway.', qty:'3 pcs', min:1900, max:2600, where:HW, link:'#', linktext:'"1 × 1 tubular, 1.5 mm"', must:1},
+  {id:'s4', name:'SHS 65 × 65 × 2.0 mm offcut — palupo sleeve', note:'300 mm long. Must be a loose slide fit over the 50 × 50 palupo, with a drain hole.', qty:'1 pc', min:250, max:450, where:HW, link:'#', linktext:'Ask for a cut-off'},
+  {id:'s5', name:'MS plate 150 × 150 × 6 mm — cap plates', note:'Four for the column caps, four spare for the brace feet cast into the pedestals.', qty:'8 pcs', min:800, max:1400, where:HW, link:'#', linktext:'Steel shop will cut to size'},
+  {id:'s6', name:'Anchor / J-bolts 12 mm', note:'Cast into the wet column tops, two per side of each cap plate.', qty:'16 pcs', min:800, max:1300, where:HW, link:'#', linktext:'Hardware', must:1},
+  {id:'s7', name:'Welding rod 6013, 2.5 mm', note:'General-purpose rod for this gauge of tube.', qty:'4 kg', min:700, max:1000, where:'Shopee or hardware', link:'https://da.gd/lUZxCJ', linktext:'Shopee'},
+  {id:'s8', name:'Cutting + grinding discs 4"', note:'You will get through more cutting discs than you expect on 2 mm tube.', qty:'10 pcs', min:450, max:800, where:'Shopee or hardware', link:'#', linktext:'Hardware'},
+  {id:'s9', name:'Red oxide primer + enamel', note:'Two coats each. Paint everything on the ground before erection — you cannot reach it after.', qty:'2 gal', min:1300, max:2000, where:'Shopee or hardware', link:'https://da.gd/1BDhO', linktext:'Shopee', must:1},
+
+  {id:'g3', grp:'Deck'},
+  {id:'d1', name:'Coco lumber 2 × 4 × 10 ft — joists', note:'Eight joists at 400 mm centres, spanning 1,800 mm with 600 mm overhangs.', qty:'8 pcs', min:1200, max:1800, where:HW, link:'#', linktext:'Lumberyard', must:1},
+  {id:'d2', name:'Coco / good lumber 2 × 4 × 10 ft — deck planks', note:'29 planks laid with a 5 mm gap. Good lumber costs more but stays straighter.', qty:'29 pcs', min:4350, max:6500, where:HW, link:'#', linktext:'Lumberyard', must:1},
+  {id:'d3', name:'Coco lumber 2 × 2 × 10 ft — toe-kerb', note:'50 mm edge stop around the perimeter. Cheap, invisible, and it is your only edge protection.', qty:'4 pcs', min:280, max:450, where:HW, link:'#', linktext:'Lumberyard'},
+  {id:'d4', name:'Wood preservative', note:'Two coats on every face and every cut end, before assembly. Non-negotiable in Batangas.', qty:'2 gal', min:2200, max:3200, where:'Shopee or hardware', link:'https://da.gd/ouTJOU', linktext:'Shopee', must:1},
+  {id:'d5', name:'Deck screws 3" galvanised', note:'Two per plank per joist. Galvanised, not black — they sit in the weather.', qty:'2 kg', min:450, max:750, where:'Shopee or hardware', link:'https://da.gd/l7Jj', linktext:'Shopee'},
+  {id:'d6', name:'Eye bolts 10 mm — tent tie-downs', note:'Seven through the rim beam. You cannot peg a tent into a deck; this is how the guys anchor.', qty:'8 pcs', min:400, max:800, where:'Shopee or hardware', link:'https://da.gd/6lV9I', linktext:'Shopee', must:1},
+
+  {id:'g4', grp:'Stair'},
+  {id:'t1', name:'RHS 50 × 75 × 2.0 mm × 6 m — stringers', note:'Two at 3,450 mm for a 45° run. Nine treads at 271 mm rise and 271 mm going.', qty:'2 pcs', min:3000, max:4200, where:HW, link:'#', linktext:'Steel shop', must:1},
+  {id:'t2', name:'Coco / good lumber 2 × 8 × 10 ft — treads', note:'Twelve treads at 600 mm wide, cut from three lengths.', qty:'3 pcs', min:900, max:1400, where:HW, link:'#', linktext:'Lumberyard'},
+  {id:'t3', name:'SHS 25 × 25 × 1.5 mm × 6 m — handrail', note:'At 900 mm above the nosing line. At 45° you will want it on both sides.', qty:'2 pcs', min:1250, max:1750, where:HW, link:'#', linktext:'Steel shop'},
+  {id:'t4', name:'Drop-in pins + hardware', note:'Lets the bottom 600 mm lift out so nothing climbs up while you are away.', qty:'1 set', min:600, max:1200, where:HW, link:'#', linktext:'Hardware'},
+
+  {id:'g5', grp:'Tarp &amp; palupo kit'},
+  {id:'p1', name:'Heavy trapal 4 × 5 m', note:'Sized to overhang the deck edge so the runoff lands off the platform.', qty:'1 pc', min:1100, max:1900, where:'Shopee', link:'https://da.gd/TvfwY', linktext:'Shopee'},
+  {id:'p2', name:'Nylon rope 10 mm × 20 m', note:'Ridge line plus two guys from the palupo top back to the far deck corners.', qty:'1 roll', min:350, max:650, where:'Shopee', link:'https://da.gd/tn58xq', linktext:'Shopee'},
+  {id:'p3', name:'Turnbuckles + shackles', note:'Lets you tension the guys properly so the palupo cannot bend in a gust.', qty:'4 sets', min:500, max:900, where:'Shopee', link:'https://da.gd/qhdGi', linktext:'Shopee'},
+
+  {id:'g6', grp:'Alternatives — swaps, not extras'},
+  {id:'a1', name:'Marine plywood 3/4" 4 × 8 — instead of plank deck', note:'Saves about ₱1,000 and goes down in a morning, but delaminates at the edges after a few rainy seasons.', qty:'3 sheets', min:3300, max:4300, where:'Shopee or hardware', link:'#', linktext:'Hardware', alt:1},
+  {id:'a2', name:'Hinged stair + rope-and-pulley — instead of lift-out step', note:'The "drawbridge" version. Hauls the whole stair up flat against the deck. Adds a pivot and a pulley that can seize.', qty:'1 set', min:1500, max:2800, where:HW, link:'#', linktext:'Hardware', alt:1},
+  {id:'a3', name:'Hot-dip galvanising the frame — instead of paint', note:'15+ years maintenance-free. Worth it if you are within a kilometre of the shore.', qty:'~80 kg', min:6000, max:10000, where:'Galvanising plant', link:'#', linktext:'Batangas / Laguna plants', alt:1},
+  {id:'a4', name:'900 mm railing, three sides — if you change your mind', note:'25 × 25 tube posts and welded wire mesh. You said no railing; this is what it would cost to add later.', qty:'~9 m', min:4000, max:5500, where:HW, link:'#', linktext:'Steel shop', alt:1},
+];
+const STORE_KEY = 'tent-platform-BOMv1';
+
+const peso = n => '₱' + n.toLocaleString('en-PH');
+function loadState(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; } }
+function saveState(s){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(s)); }catch(e){} }
+function pills(it){ let p=''; if(it.must)p+=' <span class="pill must">don\'t skip</span>'; if(it.opt)p+=' <span class="pill opt">optional</span>'; if(it.alt)p+=' <span class="pill alt">alternative</span>'; return p; }
+function render(){
+  const state=loadState(), body=document.getElementById('bomBody'); if(!body) return; let n=0;
+  body.innerHTML = BOM.map((it)=>{
+    if(it.grp) return `<tr class="grp"><td colspan="5">${it.grp}</td></tr>`;
+    const got=!!state[it.id], num=it.alt?'':(++n)+'. ';
+    const where = it.link==='#' ? `${it.where}<br><span class="item-note" style="margin:0">${it.linktext}</span>`
+                                : `${it.where}<br><a target="_blank" rel="noopener" href="${it.link}">${it.linktext} →</a>`;
+    return `<tr class="${it.alt?'alt':''} ${got?'got':''}" data-id="${it.id}">
+      <td class="c"><input type="checkbox" class="chk" ${got?'checked':''} aria-label="Got ${it.name}" onchange="toggleItem('${it.id}',this.checked)"></td>
+      <td><span class="item-name">${num}${it.name}</span>${pills(it)}<span class="item-note">${it.note}</span></td>
+      <td class="c">${it.qty}</td><td class="price">${peso(it.min)}–${peso(it.max)}</td>
+      <td class="where">${where}</td></tr>`;
+  }).join(''); recompute();
+}
+function toggleItem(id,checked){ const s=loadState(); if(checked)s[id]=1; else delete s[id]; saveState(s);
+  const tr=document.querySelector(`tr[data-id="${id}"]`); if(tr)tr.classList.toggle('got',checked); recompute(); }
+function recompute(){
+  const state=loadState(); let remMin=0,remMax=0,fullMin=0,fullMax=0,bought=0,total=0;
+  BOM.forEach(it=>{ if(it.alt||it.grp)return; total++; fullMin+=it.min; fullMax+=it.max; if(state[it.id])bought++; else{remMin+=it.min;remMax+=it.max;} });
+  const set=(id,v)=>{const el=document.getElementById(id); if(el)el.textContent=v;};
+  set('remaining',`${peso(remMin)} – ${peso(remMax)}`); set('fulltotal',`${peso(fullMin)} – ${peso(fullMax)}`);
+  set('boughtcount',`${bought} / ${total}`); const bar=document.getElementById('bar'); if(bar)bar.style.width=(total?(bought/total*100):0)+'%';
+}
+function resetList(){ if(confirm('Clear all "Got it" checkmarks?')){ saveState({}); render(); } }
+function toggleStages(open){ document.querySelectorAll('details.stage').forEach(d=>d.open=open); }
+render();
+</script>
+</body>
+</html>
